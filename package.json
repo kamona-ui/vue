@@ -1,0 +1,45 @@
+{
+    "name": "@kamona-ui/vue",
+    "description": "K UI vue components",
+    "version": "0.0.1",
+    "license": "MIT",
+    "author": {
+        "name": "Ahmed Kamel",
+        "email": "ak3849909@gmail.com"
+    },
+    "type": "module",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kamona-ui/vue.git"
+    },
+    "files": [
+        "dist"
+    ],
+    "module": "./dist/kui-vue.es.js",
+    "exports": {
+        ".": {
+            "import": "./dist/kui-vue.es.js"
+        },
+        "./dist/style.css": "./dist/style.css"
+    },
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "format": "prettier -w src"
+    },
+    "dependencies": {
+        "@headlessui/vue": "^1.7.22",
+        "@iconify/vue": "^4.1.2",
+        "vue": "^3.4.37"
+    },
+    "devDependencies": {
+        "@tailwindcss/forms": "^0.5.9",
+        "@vitejs/plugin-vue-jsx": "^4.0.1",
+        "autoprefixer": "^10.4.20",
+        "postcss": "^8.4.45",
+        "prettier": "^3.3.3",
+        "tailwindcss": "^3.4.10",
+        "vite": "^5.4.1"
+    }
+}
