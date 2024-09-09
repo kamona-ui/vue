@@ -15,7 +15,7 @@ export default defineComponent({
             <>
                 <div class="p-10">
                     <KuiButtonGroup outline variant="black">
-                        {tabs.map(tab => (
+                        {tabs.map((tab) => (
                             <button
                                 onClick={() => {
                                     activeTab.value = tab

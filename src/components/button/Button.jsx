@@ -258,8 +258,12 @@ export default defineComponent({
                     {...attrs}
                 >
                     {srText && <span class="sr-only">{srText}</span>}
-                    {icon  && iconOnly && <Icon icon={icon} class={iconSizeClasses} />}
-                    {startIcon && <Icon icon={startIcon} class={iconSizeClasses} />}
+                    {icon && iconOnly && (
+                        <Icon icon={icon} class={iconSizeClasses} />
+                    )}
+                    {startIcon && (
+                        <Icon icon={startIcon} class={iconSizeClasses} />
+                    )}
                     {text ?? slots.default?.({ iconSizeClasses })}
                     {endIcon && <Icon icon={endIcon} class={iconSizeClasses} />}
                 </Tag>
@@ -275,7 +279,9 @@ export default defineComponent({
                 {...attrs}
             >
                 {srText && <span class="sr-only">{srText}</span>}
-                {icon  && iconOnly && <Icon icon={icon} class={iconSizeClasses} />}
+                {icon && iconOnly && (
+                    <Icon icon={icon} class={iconSizeClasses} />
+                )}
                 {startIcon && <Icon icon={startIcon} class={iconSizeClasses} />}
                 {text ?? slots.default?.({ iconSizeClasses })}
                 {endIcon && <Icon icon={endIcon} class={iconSizeClasses} />}

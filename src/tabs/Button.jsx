@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue'
 import { types, size, variants } from '@/data.json'
- 
+
 export default defineComponent({
     setup() {
         return () => (
@@ -69,5 +69,5 @@ export default defineComponent({
                 </div>
             </div>
         )
-    } 
+    },
 })

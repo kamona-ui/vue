@@ -6,7 +6,7 @@ export default defineComponent({
     setup() {
         return () => (
             <div>
-                {avatar_shapes.map(shape => (
+                {avatar_shapes.map((shape) => (
                     <div class="p-10 flex gap-6">
                         {size.map((s) => (
                             <KuiAvatar
@@ -20,5 +20,5 @@ export default defineComponent({
                 ))}
             </div>
         )
-    } 
+    },
 })

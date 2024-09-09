@@ -94,7 +94,7 @@ const ButtonGroup = defineComponent({
     setup(props, { slots }) {
         const { size, square, pill, iconOnly } = props
         const defaultColorClasses = colorClasses[props.variant]?.default
-        const cClasses =props.outline
+        const cClasses = props.outline
             ? colorClasses[props.variant]?.outline
             : colorClasses[props.variant]?.filled
 
@@ -118,11 +118,7 @@ const ButtonGroup = defineComponent({
         ]
 
         return () => (
-            <div class={[
-                    'inline-flex items-stretch', 
-                    ...childrenClasses,
-                ]}
-            >
+            <div class={['inline-flex items-stretch', ...childrenClasses]}>
                 {slots.default?.()}
             </div>
         )
