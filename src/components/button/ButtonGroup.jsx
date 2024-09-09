@@ -1,19 +1,16 @@
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
+import { baseButtonProps } from './Button'
 
 const baseClasses = [
     '*:inline-flex',
     '*:items-center',
-    '*:transition-colors',
-    '*:font-medium',
+    '*:transition',
+    '*:font-semibold',
     '*:select-none',
     'disabled:*:opacity-50',
     'disabled:*:cursor-not-allowed',
     'focus:*:outline-none',
     'focus:*:z-10',
-    // 'focus:ring',
-    // {
-    //     'focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-eval-2': !props.group,
-    // }
 ]
 
 const focusClasses = [
@@ -92,54 +89,14 @@ const paddingClasses = {
 }
 
 const ButtonGroup = defineComponent({
-    props: {
-        variant: {
-            type: String,
-            default: 'primary',
-            validator(value) {
-                return [
-                    'primary',
-                    'success',
-                    'info',
-                    'warning',
-                    'danger',
-                    'white',
-                    'black',
-                    'link',
-                ].includes(value)
-            },
-        },
-        size: {
-            type: String,
-            default: 'base',
-            validator(value) {
-                return ['sm', 'base', 'lg'].includes(value)
-            },
-        },
-        iconOnly: {
-            type: Boolean,
-            default: false,
-        },
-        square: {
-            type: Boolean,
-            default: false,
-        },
-        pill: {
-            type: Boolean,
-            default: false,
-        },
-        outline: {
-            type: Boolean,
-            default: false,
-        },
-    },
+    props: baseButtonProps,
 
     setup(props, { slots }) {
         const { size, square, pill, iconOnly } = props
-        const defaultColorClasses = colorClasses[props.variant].default
-        const cClasses = props.outline
-            ? colorClasses[props.variant].outline
-            : colorClasses[props.variant].filled
+        const defaultColorClasses = colorClasses[props.variant]?.default
+        const cClasses =props.outline
+            ? colorClasses[props.variant]?.outline
+            : colorClasses[props.variant]?.filled
 
         const childrenClasses = [
             ...baseClasses,
@@ -161,7 +118,11 @@ const ButtonGroup = defineComponent({
         ]
 
         return () => (
-            <div class={['inline-flex items-stretch', ...childrenClasses]}>
+            <div class={[
+                    'inline-flex items-stretch', 
+                    ...childrenClasses,
+                ]}
+            >
                 {slots.default?.()}
             </div>
         )

@@ -1,11 +1,12 @@
 import { defineComponent, toRefs } from 'vue'
+import { Icon } from '@iconify/vue'
 
 const baseClasses = [
     'inline-flex',
     'items-center',
     'justify-center',
     'gap-2',
-    'transition-colors',
+    'transition',
     'min-w-max',
     'font-semibold',
     'select-none',
@@ -71,8 +72,52 @@ const focusOffsetClasses = ['focus:ring-offset-2']
 
 const focusClasses = ['focus:outline-none', 'focus:ring']
 
+export const baseButtonProps = {
+    variant: {
+        type: String,
+        default: 'primary',
+        validator(value) {
+            return [
+                'primary',
+                'success',
+                'info',
+                'warning',
+                'danger',
+                'white',
+                'black',
+                'link',
+            ].includes(value)
+        },
+    },
+    size: {
+        type: String,
+        default: 'base',
+        validator(value) {
+            return ['sm', 'base', 'lg'].includes(value)
+        },
+    },
+    square: {
+        type: Boolean,
+        default: false,
+    },
+    pill: {
+        type: Boolean,
+        default: false,
+    },
+    iconOnly: {
+        type: Boolean,
+        default: false,
+    },
+    outline: {
+        type: Boolean,
+        default: false,
+    },
+}
+
 export default defineComponent({
     props: {
+        ...baseButtonProps,
+
         as: {
             type: String,
             default: 'a',
@@ -81,50 +126,14 @@ export default defineComponent({
             type: [String, undefined],
             default: undefined,
         },
-        variant: {
+        href: {
             type: String,
-            default: 'primary',
-            validator(value) {
-                return [
-                    'primary',
-                    // 'secondary',
-                    'success',
-                    'info',
-                    'warning',
-                    'danger',
-                    'white',
-                    'black',
-                    'link',
-                ].includes(value)
-            },
         },
         type: {
             type: String,
             default: 'submit',
         },
-        size: {
-            type: String,
-            default: 'base',
-            validator(value) {
-                return ['sm', 'base', 'lg'].includes(value)
-            },
-        },
-        square: {
-            type: Boolean,
-            default: false,
-        },
-        pill: {
-            type: Boolean,
-            default: false,
-        },
-        href: {
-            type: String,
-        },
         disabled: {
-            type: Boolean,
-            default: false,
-        },
-        iconOnly: {
             type: Boolean,
             default: false,
         },
@@ -132,17 +141,29 @@ export default defineComponent({
             type: String || undefined,
             default: undefined,
         },
-        external: {
-            type: Boolean,
-            default: false,
+        text: {
+            type: String || undefined,
+            default: undefined,
         },
-        outline: {
+        external: {
             type: Boolean,
             default: false,
         },
         block: {
             type: Boolean,
             default: false,
+        },
+        icon: {
+            type: String || undefined,
+            default: undefined,
+        },
+        startIcon: {
+            type: String || undefined,
+            default: undefined,
+        },
+        endIcon: {
+            type: String || undefined,
+            default: undefined,
         },
         ringOffsetColorClass: {
             type: String,
@@ -163,9 +184,13 @@ export default defineComponent({
             href,
             iconOnly,
             srText,
+            text,
             external,
             outline,
             block,
+            icon,
+            startIcon,
+            endIcon,
             ringOffsetColorClass,
         } = props
 
@@ -233,7 +258,10 @@ export default defineComponent({
                     {...attrs}
                 >
                     {srText && <span class="sr-only">{srText}</span>}
-                    {slots.default?.({ iconSizeClasses })}
+                    {icon  && iconOnly && <Icon icon={icon} class={iconSizeClasses} />}
+                    {startIcon && <Icon icon={startIcon} class={iconSizeClasses} />}
+                    {text ?? slots.default?.({ iconSizeClasses })}
+                    {endIcon && <Icon icon={endIcon} class={iconSizeClasses} />}
                 </Tag>
             )
         }
@@ -247,7 +275,10 @@ export default defineComponent({
                 {...attrs}
             >
                 {srText && <span class="sr-only">{srText}</span>}
-                {slots.default?.({ iconSizeClasses })}
+                {icon  && iconOnly && <Icon icon={icon} class={iconSizeClasses} />}
+                {startIcon && <Icon icon={startIcon} class={iconSizeClasses} />}
+                {text ?? slots.default?.({ iconSizeClasses })}
+                {endIcon && <Icon icon={endIcon} class={iconSizeClasses} />}
             </button>
         )
     },

@@ -1,0 +1,17 @@
+{
+    "types": ["filled", "outline"],
+    "shapes": ["square", "rounded", "pill"],
+    "avatar_shapes": ["square", "rounded", "circle"],
+    "size": ["sm", "base", "lg"],
+    "variants": [
+        "primary",
+        "success",
+        "info",
+        "warning",
+        "danger",
+        "white",
+        "black",
+        "link"
+    ],
+    "tabs": ["Avatar", "Button", "ButtonGroup", "Form", "Panel", "Modal"]
+}

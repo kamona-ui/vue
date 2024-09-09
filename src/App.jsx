@@ -1,166 +1,39 @@
 import { defineComponent, ref } from 'vue'
-import userAvatar from './assets/57622665.jpeg'
-import { Icon } from '@iconify/vue'
+import { tabs } from './data.json'
+import Avatar from './tabs/Avatar'
+import Button from './tabs/Button'
+import ButtonGroup from './tabs/ButtonGroup'
+import Form from './tabs/Form'
+import Panel from './tabs/Panel'
+import Modal from './tabs/Modal'
 
 export default defineComponent({
     setup() {
-        const types = ['filled', 'outline']
-        const shapes = ['square', 'roundded', 'pill']
-        const size = ['sm', 'base', 'lg']
-        const variants = [
-            'primary',
-            'success',
-            'info',
-            'warning',
-            'danger',
-            'white',
-            'black',
-            'link',
-        ]
+        const activeTab = ref('Avatar')
 
-        const showPanel = ref(false)
-        const showModal = ref(false)
         return () => (
             <>
-                <KuiPanel
-                    title="PANEL"
-                    show={showPanel.value}
-                    onClose={() => {
-                        showPanel.value = false
-                    }}
-                >
-                    <p>Panel</p>
-                </KuiPanel>
-
-                <KuiModal
-                    show={showModal.value}
-                    onClose={() => {
-                        showModal.value = false
-                    }}
-                >
-                    <div class="p-10">
-                        <p>Modal</p>
-                    </div>
-                </KuiModal>
-
-                <div class="p-10 space-x-4">
-                    <KuiButton
-                        onClick={() => {
-                            showPanel.value = true
-                        }}
-                    >
-                        Panel
-                    </KuiButton>
-
-                    <KuiButton
-                        onClick={() => {
-                            showModal.value = true
-                        }}
-                    >
-                        Modal
-                    </KuiButton>
+                <div class="p-10">
+                    <KuiButtonGroup outline variant="black">
+                        {tabs.map(tab => (
+                            <button
+                                onClick={() => {
+                                    activeTab.value = tab
+                                }}
+                            >
+                                {tab}
+                            </button>
+                        ))}
+                    </KuiButtonGroup>
                 </div>
 
-                <div class="p-10 flex gap-6">
-                    {size.map((s) => (
-                        <KuiAvatar
-                            size={s}
-                            src={userAvatar}
-                            alt="User Avatar"
-                        />
-                    ))}
-                </div>
-
-                <div class="p-10 flex flex-col gap-6">
-                    {types.map((t) => (
-                        <div class="flex flex-col gap-2">
-                            {size.map((s) => (
-                                <div class="flex gap-2">
-                                    {variants.map((v) => (
-                                        <KuiButton
-                                            outline={t == 'outline'}
-                                            variant={v}
-                                            size={s}
-                                        >
-                                            Button
-                                        </KuiButton>
-                                    ))}
-                                </div>
-                            ))}
-                        </div>
-                    ))}
-                </div>
-
-                <div class="p-10 flex flex-col gap-6">
-                    {types.map((t) => (
-                        <div class="flex flex-col gap-2">
-                            {size.map((s) => (
-                                <div class="flex gap-2">
-                                    {variants.map((v) => (
-                                        <KuiButton
-                                            icon-only
-                                            outline={t == 'outline'}
-                                            variant={v}
-                                            size={s}
-                                        >
-                                            {({ iconSizeClasses }) => (
-                                                <Icon
-                                                    icon="tabler:home"
-                                                    class={iconSizeClasses}
-                                                ></Icon>
-                                            )}
-                                        </KuiButton>
-                                    ))}
-                                </div>
-                            ))}
-                        </div>
-                    ))}
-                </div>
-
-                <div class="p-10 flex flex-col gap-6">
-                    {types.map((t) => (
-                        <div class="flex flex-col gap-2">
-                            {size.map((s) => (
-                                <div class="flex gap-2">
-                                    {variants.map((v) => (
-                                        <KuiButton
-                                            outline={t == 'outline'}
-                                            variant={v}
-                                            size={s}
-                                            disabled
-                                        >
-                                            Button
-                                        </KuiButton>
-                                    ))}
-                                </div>
-                            ))}
-                        </div>
-                    ))}
-                </div>
-
-                <div class="p-10 flex flex-col gap-6">
-                    {types.map((t) => (
-                        <>
-                            {size.map((s) => (
-                                <>
-                                    {variants.map((v) => (
-                                        <div class="flex flex-col gap-2">
-                                            <KuiButtonGroup
-                                                outline={t == 'outline'}
-                                                size={s}
-                                                variant={v}
-                                            >
-                                                <button>Test</button>
-                                                <button>Test</button>
-                                                <button>Test</button>
-                                                <button>Test</button>
-                                            </KuiButtonGroup>
-                                        </div>
-                                    ))}
-                                </>
-                            ))}
-                        </>
-                    ))}
+                <div>
+                    <Avatar v-show={activeTab.value == 'Avatar'} />
+                    <Button v-show={activeTab.value == 'Button'} />
+                    <ButtonGroup v-show={activeTab.value == 'ButtonGroup'} />
+                    <Form v-show={activeTab.value == 'Form'} />
+                    <Panel v-show={activeTab.value == 'Panel'} />
+                    <Modal v-show={activeTab.value == 'Modal'} />
                 </div>
             </>
         )
