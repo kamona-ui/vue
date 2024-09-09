@@ -3,6 +3,7 @@ import './css/style.css'
 import {
     Avatar,
     Button,
+    ButtonGroup,
     Input,
     Label,
     Checkbox,
@@ -13,6 +14,7 @@ import {
 const components = {
     Avatar,
     Button,
+    ButtonGroup,
     Input,
     Label,
     Checkbox,
@@ -31,6 +33,7 @@ export default install
 export {
     Avatar as KuiAvatar,
     Button as KuiButton,
+    ButtonGroup as KuiButtonGroup,
     Input as KuiInput,
     Label as KuiLabel,
     Checkbox as KuiCheckbox,

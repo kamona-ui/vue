@@ -109,7 +109,7 @@ export default defineComponent({
                 return ['sm', 'base', 'lg'].includes(value)
             },
         },
-        squared: {
+        square: {
             type: Boolean,
             default: false,
         },
@@ -158,7 +158,7 @@ export default defineComponent({
             type,
             variant,
             size,
-            squared,
+            square,
             pill,
             href,
             iconOnly,
@@ -193,7 +193,7 @@ export default defineComponent({
                       'px-5 py-2 text-xl': size == 'lg',
                   },
             {
-                'rounded-md': !squared && !pill,
+                'rounded-md': !square && !pill,
                 'rounded-full': pill,
             },
             {
