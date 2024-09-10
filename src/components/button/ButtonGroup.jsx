@@ -1,6 +1,7 @@
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 import { baseButtonProps } from './Button'
 
+// TODO: Handle active button style
 const baseClasses = [
     '*:inline-flex',
     '*:items-center',

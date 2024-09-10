@@ -2,15 +2,27 @@ import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
     setup() {
-        const showPanel = ref(false)
+        const showRightPanel = ref(false)
+        const showLeftPanel = ref(false)
 
         return () => (
             <div>
                 <KuiPanel
                     title="PANEL"
-                    show={showPanel.value}
+                    show={showRightPanel.value}
                     onClose={() => {
-                        showPanel.value = false
+                        showRightPanel.value = false
+                    }}
+                >
+                    <p>Panel</p>
+                </KuiPanel>
+
+                <KuiPanel
+                    title="PANEL"
+                    position="left"
+                    show={showLeftPanel.value}
+                    onClose={() => {
+                        showLeftPanel.value = false
                     }}
                 >
                     <p>Panel</p>
@@ -19,9 +31,16 @@ export default defineComponent({
                 <div class="p-10 space-x-4">
                     <KuiButton
                         onClick={() => {
-                            showPanel.value = true
+                            showRightPanel.value = true
                         }}
-                        text="Panel"
+                        text="Right Panel"
+                    />
+
+                    <KuiButton
+                        onClick={() => {
+                            showLeftPanel.value = true
+                        }}
+                        text="Left Panel"
                     />
                 </div>
             </div>

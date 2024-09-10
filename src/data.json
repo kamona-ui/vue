@@ -13,5 +13,13 @@
         "black",
         "link"
     ],
-    "tabs": ["Avatar", "Button", "ButtonGroup", "Form", "Panel", "Modal"]
+    "tabs": [
+        "Avatar",
+        "Badge",
+        "Button",
+        "ButtonGroup",
+        "Form",
+        "Panel",
+        "Modal"
+    ]
 }

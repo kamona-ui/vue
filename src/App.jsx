@@ -1,6 +1,7 @@
 import { defineComponent, ref } from 'vue'
 import { tabs } from './data.json'
 import Avatar from './tabs/Avatar'
+import Badge from './tabs/Badge'
 import Button from './tabs/Button'
 import ButtonGroup from './tabs/ButtonGroup'
 import Form from './tabs/Form'
@@ -29,6 +30,7 @@ export default defineComponent({
 
                 <div>
                     <Avatar v-show={activeTab.value == 'Avatar'} />
+                    <Badge v-show={activeTab.value == 'Badge'} />
                     <Button v-show={activeTab.value == 'Button'} />
                     <ButtonGroup v-show={activeTab.value == 'ButtonGroup'} />
                     <Form v-show={activeTab.value == 'Form'} />

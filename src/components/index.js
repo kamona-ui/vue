@@ -1,5 +1,6 @@
 export { Avatar } from './avatar'
+export { Badge, Dot } from './badge'
 export { Button, ButtonGroup } from './button'
-export { Input, Label, Checkbox } from './form'
+export { Input, Label, Checkbox, DatePicker } from './form'
 export { Panel } from './panel'
 export { Modal } from './modal'

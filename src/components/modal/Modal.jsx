@@ -48,12 +48,6 @@ export default defineComponent({
                         />
                     </TransitionChild>
 
-                    {/* <div
-                        class="fixed inset-0 pointer-events-none overflow-y-auto px-4 py-6 sm:px-0 z-50"
-                    >
-                        
-                    </div> */}
-
                     <div class="p-6">
                         <TransitionChild
                             enter="ease-out duration-300"
@@ -65,7 +59,7 @@ export default defineComponent({
                         >
                             <div
                                 class={[
-                                    'mb-6 bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:mx-auto',
+                                    'bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl transform transition-all sm:mx-auto',
                                     props.width,
                                 ]}
                             >

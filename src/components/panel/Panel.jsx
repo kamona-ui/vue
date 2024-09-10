@@ -35,13 +35,14 @@ export default defineComponent({
         const { title, position, width } = props
 
         const close = (e) => {
-            emit('close')
+            emit('close', e)
         }
 
         const ifPosition = (pos) => {
             return position == pos
         }
 
+        // TODO: Fix transition
         return () => (
             <TransitionRoot appear as="template" show={props.show}>
                 <Dialog
