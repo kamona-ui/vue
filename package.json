@@ -21,7 +21,7 @@
         ".": {
             "import": "./dist/kui-vue.es.js"
         },
-        "./dist/style.css": "./dist/style.css"
+        "./style": "./dist/style.css"
     },
     "scripts": {
         "dev": "vite",
@@ -40,8 +40,9 @@
         "@vitejs/plugin-vue-jsx": "^4.0.1",
         "autoprefixer": "^10.4.20",
         "postcss": "^8.4.45",
+        "postcss-import": "^16.1.0",
         "prettier": "^3.3.3",
-        "tailwindcss": "^3.4.10",
+        "tailwindcss": "^3.4.11",
         "vite": "^5.4.1"
     }
 }

@@ -1,41 +1,6 @@
 import './css/style.css'
 
-import {
-    Avatar,
-    Badge,
-    Dot,
-    Button,
-    ButtonGroup,
-    Input,
-    Label,
-    Checkbox,
-    DatePicker,
-    Panel,
-    Modal,
-} from './components'
-
-const components = {
-    Avatar,
-    Badge,
-    Dot,
-    Button,
-    ButtonGroup,
-    Input,
-    Label,
-    Checkbox,
-    DatePicker,
-    Panel,
-    Modal,
-}
-
-function install(Vue) {
-    for (const component in components) {
-        Vue.component(`Kui${component}`, components[component])
-    }
-}
-
-export default install
-
+import * as components from './components'
 export {
     Avatar as KuiAvatar,
     Badge as KuiBadge,
@@ -48,4 +13,12 @@ export {
     DatePicker as KuiDatePicker,
     Panel as KuiPanel,
     Modal as KuiModal,
+} from './components'
+
+function install(Vue) {
+    for (const component in components) {
+        Vue.component(`Kui${component}`, components[component])
+    }
 }
+
+export default install

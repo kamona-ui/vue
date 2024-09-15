@@ -7,7 +7,10 @@ export default defineComponent({
 
     setup(props, { slots }) {
         return () => (
-            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            <label class={[
+                !slots.default && 'block',
+                'text-sm font-medium text-gray-700 dark:text-gray-300'
+            ]}>
                 {props.value ? <span>{props.value}</span> : slots.default?.()}
             </label>
         )

@@ -1,4 +1,4 @@
-import { defineComponent, toRefs } from 'vue'
+import { computed, defineComponent, toRefs } from 'vue'
 import { Icon } from '@iconify/vue'
 
 const baseClasses = [
@@ -8,7 +8,7 @@ const baseClasses = [
     'gap-2',
     'transition',
     'min-w-max',
-    'font-semibold',
+    'font-medium',
     'select-none',
     'disabled:opacity-50',
     'disabled:cursor-not-allowed',
@@ -66,6 +66,11 @@ const colorClasses = {
         filled: '',
         outline: 'border border-blue-500',
     },
+    transparent: {
+        default: 'focus:ring-primary',
+        filled: 'text-gray-800 hover:text-gray-700 dark:text-gray-200 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-dark-eval-0',
+        outline: 'text-primary hover:text-primary-light',
+    },
 }
 
 const focusOffsetClasses = ['focus:ring-offset-2']
@@ -86,6 +91,7 @@ export const baseButtonProps = {
                 'white',
                 'black',
                 'link',
+                'transparent',
             ].includes(value)
         },
     },
@@ -119,7 +125,8 @@ export default defineComponent({
         ...baseButtonProps,
 
         as: {
-            type: String,
+            // type: String,
+            required: false,
             default: 'a',
         },
         to: {
@@ -170,6 +177,14 @@ export default defineComponent({
             default:
                 'focus:ring-offset-white dark:focus:ring-offset-dark-eval-2',
         },
+        noPadding: {
+            type: Boolean,
+            default: false,
+        },
+        active: {
+            type: Boolean,
+            default: false,
+        }
     },
 
     emits: ['click'],
@@ -184,21 +199,26 @@ export default defineComponent({
             href,
             iconOnly,
             srText,
-            text,
             external,
             outline,
             block,
-            icon,
+            // icon,
             startIcon,
             endIcon,
             ringOffsetColorClass,
+            noPadding,
         } = props
 
-        const { disabled } = toRefs(props)
+        const { disabled, icon, text } = toRefs(props)
+
+        const vClass = computed(() => {
+            return ''
+        })
 
         const classes = [
             ...baseClasses,
             colorClasses[variant].default,
+            props.active && colorClasses[variant].default?.[props.active],
             outline
                 ? colorClasses[variant].outline
                 : colorClasses[variant].filled,
@@ -206,6 +226,7 @@ export default defineComponent({
             ringOffsetColorClass,
             focusOffsetClasses,
             block ? 'w-full' : null,
+            noPadding ? null : 
             iconOnly
                 ? {
                       'p-1.5': size == 'sm',
@@ -225,6 +246,7 @@ export default defineComponent({
                 'pointer-events-none opacity-50':
                     (href || props.to) && disabled.value,
             },
+            // vClasses,
         ]
 
         const iconSizeClasses = [
@@ -259,12 +281,12 @@ export default defineComponent({
                 >
                     {srText && <span class="sr-only">{srText}</span>}
                     {icon && iconOnly && (
-                        <Icon icon={icon} class={iconSizeClasses} />
+                        <Icon icon={icon.value} class={iconSizeClasses} />
                     )}
                     {startIcon && (
                         <Icon icon={startIcon} class={iconSizeClasses} />
                     )}
-                    {text ?? slots.default?.({ iconSizeClasses })}
+                    {text.value ?? slots.default?.({ iconSizeClasses })}
                     {endIcon && <Icon icon={endIcon} class={iconSizeClasses} />}
                 </Tag>
             )
@@ -280,10 +302,14 @@ export default defineComponent({
             >
                 {srText && <span class="sr-only">{srText}</span>}
                 {icon && iconOnly && (
-                    <Icon icon={icon} class={iconSizeClasses} />
+                    <Icon icon={icon.value} class={[
+                        iconSizeClasses,
+                        // 'fill-current',
+                        // 'stroke-current'
+                    ]} />
                 )}
                 {startIcon && <Icon icon={startIcon} class={iconSizeClasses} />}
-                {text ?? slots.default?.({ iconSizeClasses })}
+                {text.value ?? slots.default?.({ iconSizeClasses })}
                 {endIcon && <Icon icon={endIcon} class={iconSizeClasses} />}
             </button>
         )
