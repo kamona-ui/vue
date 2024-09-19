@@ -1,6 +1,5 @@
 import * as components from './components'
-import '@/css/main.css'
-// import '@/css/tailwind.css'
+// import '@/css/main.css'
 
 export {
     Avatar as KuiAvatar,

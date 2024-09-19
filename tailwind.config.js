@@ -14,10 +14,9 @@ export default {
 
             colors: {
                 primary: {
-                    light: colors.purple[400],
-                    DEFAULT: colors.purple[500],
-                    dark: colors.purple[600],
-                    ...colors.purple,
+                    light: 'var(--color-primary-light)',
+                    DEFAULT: 'var(--color-primary)',
+                    dark:'var(--color-primary-dark)',
                 },
 
                 dark: {
