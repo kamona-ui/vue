@@ -21,19 +21,19 @@ export default defineComponent({
             'Modal',
         ]
 
-        const themeMainColors = [
-            'purple',
-            'fuchsia',
-            'violet',
-            'teal',
-            'lime',
-        ]
+        const themeMainColors = ['purple', 'fuchsia', 'violet', 'teal', 'lime']
 
         const changeMainColor = (color) => {
             const root = document.documentElement
-            root.style.setProperty('--color-primary-light', `var(--color-${color}-light)`)
+            root.style.setProperty(
+                '--color-primary-light',
+                `var(--color-${color}-light)`,
+            )
             root.style.setProperty('--color-primary', `var(--color-${color})`)
-            root.style.setProperty('--color-primary-dark', `var(--color-${color}-dark)`)
+            root.style.setProperty(
+                '--color-primary-dark',
+                `var(--color-${color}-dark)`,
+            )
         }
 
         return () => (
@@ -48,10 +48,10 @@ export default defineComponent({
                     />
 
                     <div class="flex gap-4">
-                        {themeMainColors.map(c => (
+                        {themeMainColors.map((c) => (
                             <button
                                 style={{
-                                    backgroundColor: `var(--color-${c})`
+                                    backgroundColor: `var(--color-${c})`,
                                 }}
                                 type="button"
                                 class="w-6 h-6 rounded-full"
