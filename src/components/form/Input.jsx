@@ -1,9 +1,9 @@
 import { defineComponent } from 'vue'
 import { Icon } from '@iconify/vue'
 import Label from './Label'
-import { shapeProp, sizeProp, variantProp } from '@/support'
+import { sizeProp, shapeProp, variantProp, shapes } from '@/support'
 
-const inputBaseClasses = [
+export const inputBaseClasses = [
     'w-full',
     'focus:ring',
     'focus:ring-offset-2',
@@ -20,7 +20,7 @@ const inputSizeClasses = {
 }
 
 export const inputVariantClasses = {
-    priamry: 'border-gray-400 focus:ring-primary focus:border-primary dark:border-gray-600',
+    primary: 'border-gray-400 focus:ring-primary focus:border-primary dark:border-gray-600',
     success: 'border-green-400 focus:ring-green-500 focus:border-green-500 dark:border-green-600',
     info: 'border-cyan-400 focus:ring-cyan-500 focus:border-cyan-500 dark:border-gray-600',
     warning: 'border-yellow-400 focus:ring-yellow-500 focus:border-yellow-500 dark:border-gray-600',
@@ -29,9 +29,9 @@ export const inputVariantClasses = {
 }
 
 export const baseInputProps = {
-    variant: variantProp,
-    size: sizeProp,
-    shape: shapeProp,
+    variant: variantProp({}),
+    size: sizeProp(),
+    shape: shapeProp({ shapes: shapes.filter(s => s != 'circle') }),
 }
 
 const BaseInput = defineComponent({
@@ -50,11 +50,50 @@ const BaseInput = defineComponent({
             type: Boolean,
             default: false,
         },
+        rows: {
+            type: String,
+            default: '6',
+        },
     },
 
     emits: ['update:modelValue'],
 
     setup(props, { emit, attrs }) {
+        if (props.type == 'textarea') {
+            return () => (
+                <textarea
+                    {...attrs}
+                    type={props.type}
+                    rows={props.rows}
+                    class={[
+                        ...inputBaseClasses,
+                        inputVariantClasses[props.variant],
+                        props.icon ?
+                            {
+                                // 'ps-8 pe-2': props.size == 'sm',
+                                // 'ps-10 pe-4': props.size == 'base',
+                                // 'ps-12 pe-6': props.size == 'lg',
+                                'pl-8 pr-2 rtl:pl-2 rtl:pr-8': props.size == 'sm',
+                                'pl-10 pr-4 rtl:pl-4 rtl:pr-10': props.size == 'base',
+                                'pl-12 pr-6 rtl:pl-6 rtl:pr-12': props.size == 'lg',
+                            } : {
+                                'px-2': props.size == 'sm',
+                                'px-4': props.size == 'base',
+                                'px-6': props.size == 'lg',
+                            },
+                        inputSizeClasses[props.size],
+                        {
+                            'rounded-none': props.shape == 'square',
+                            'rounded-md': props.shape == 'rounded',
+                            'rounded-full': props.shape == 'pill',
+                        }
+                    ]}
+                    value={props.modelValue}
+                    onInput={(e) => {
+                        emit('update:modelValue', e.target.value)
+                    }}></textarea>
+            )
+        }
         return () => (
             <input
                 {...attrs}
@@ -63,18 +102,23 @@ const BaseInput = defineComponent({
                     ...inputBaseClasses,
                     inputVariantClasses[props.variant],
                     props.icon ?
-                    {
-                        'ps-8 pe-2': props.size == 'sm',
-                        'ps-10 pe-4': props.size == 'base',
-                        'ps-12 pe-6': props.size == 'lg',
-                    } : {
-                        'px-2': props.size == 'sm',
-                        'px-4': props.size == 'base',
-                        'px-6': props.size == 'lg',
-                    },
+                        {
+                            // 'ps-8 pe-2': props.size == 'sm',
+                            // 'ps-10 pe-4': props.size == 'base',
+                            // 'ps-12 pe-6': props.size == 'lg',
+                            'pl-8 pr-2 rtl:pl-2 rtl:pr-8': props.size == 'sm',
+                            'pl-10 pr-4 rtl:pl-4 rtl:pr-10': props.size == 'base',
+                            'pl-12 pr-6 rtl:pl-6 rtl:pr-12': props.size == 'lg',
+                        } : {
+                            'px-2': props.size == 'sm',
+                            'px-4': props.size == 'base',
+                            'px-6': props.size == 'lg',
+                        },
                     inputSizeClasses[props.size],
                     {
+                        'rounded-none': props.shape == 'square',
                         'rounded-md': props.shape == 'rounded',
+                        'rounded-full': props.shape == 'pill',
                     }
                 ]}
                 value={props.modelValue}
@@ -154,9 +198,13 @@ const Header = defineComponent({
     },
 })
 
-const InputIconWrapper = defineComponent({
+export const InputIconWrapper = defineComponent({
     props: {
-        size: sizeProp,
+        size: sizeProp(),
+        type: {
+            type: String,
+            default: 'text'
+        },
         icon: {
             type: [String, undefined],
             default: undefined,
@@ -174,13 +222,19 @@ const InputIconWrapper = defineComponent({
             <div class="relative text-gray-500 focus-within:text-gray-900 dark:focus-within:text-gray-400">
                 <div
                     aria-hidden="true"
-                    class="absolute inset-y-0 flex items-center px-4 pointer-events-none "
+                    class={[
+                        'absolute inset-y-0 flex px-4 pointer-events-none',
+                        {
+                            'items-center': props.type != 'textarea',
+                            'items-start py-4': props.type == 'textarea',
+                        }
+                    ]}
                 >
-                    <Icon 
-                        icon={props.icon} 
+                    <Icon
+                        icon={props.icon}
                         class={[
                             iconSizeClasses[props.size],
-                        ]} 
+                        ]}
                     />
                 </div>
 
@@ -192,28 +246,23 @@ const InputIconWrapper = defineComponent({
 
 export default defineComponent({
     props: {
+        size: sizeProp(),
         icon: {
             type: [String, undefined],
             default: undefined,
         },
-
-        size: sizeProp,
-
         type: {
             type: String,
             default: 'text'
         },
-
         label: {
             type: [String, undefined],
             default: undefined,
         },
-
         helperMessage: {
             type: [String, undefined],
             default: undefined,
         },
-
         errorMessage: {
             type: [String, Boolean],
             default: false,
@@ -231,12 +280,12 @@ export default defineComponent({
                         helperMessage={props.helperMessage}
                     />
 
-                    <InputIconWrapper size={props.size} icon={props.icon}>
-                        <BaseInput 
-                            type={props.type} 
-                            icon={props.icon} 
-                            size={props.size} 
-                            {...attrs} 
+                    <InputIconWrapper size={props.size} icon={props.icon} type={props.type}>
+                        <BaseInput
+                            type={props.type}
+                            icon={props.icon}
+                            size={props.size}
+                            {...attrs}
                         />
                     </InputIconWrapper>
 
@@ -258,11 +307,11 @@ export default defineComponent({
                     <HelperMessage message={props.helperMessage} />
                 )}
 
-                <BaseInput 
-                    type={props.type} 
-                    icon={props.icon} 
-                    size={props.size} 
-                    {...attrs} 
+                <BaseInput
+                    type={props.type}
+                    icon={props.icon}
+                    size={props.size}
+                    {...attrs}
                 />
 
                 {props.errorMessage && (

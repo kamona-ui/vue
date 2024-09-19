@@ -1,5 +1,9 @@
-import { computed, defineComponent, toRefs } from 'vue'
+import { defineComponent, toRefs } from 'vue'
 import { Icon } from '@iconify/vue'
+import { shapeProp, shapes, sizeProp, variantProp, variants } from '@/support'
+
+// TODO: Handle active button style
+// TODO: handle link components `router-link, ...`
 
 const baseClasses = [
     'inline-flex',
@@ -7,6 +11,8 @@ const baseClasses = [
     'justify-center',
     'gap-2',
     'transition',
+    'duration-150',
+    'ease-in-out',
     'min-w-max',
     'font-medium',
     'select-none',
@@ -20,56 +26,102 @@ const baseClasses = [
 const colorClasses = {
     primary: {
         default: 'focus:ring-primary',
-        filled: 'bg-primary text-white hover:bg-primary-dark',
-        outline:
-            'border border-primary text-primary hover:bg-primary-light hover:text-white',
+        filled: {
+            normal: 'bg-primary text-white hover:bg-primary-dark',
+            active: 'bg-primary-600'
+        },
+        outline: {
+            normal: 'border border-primary text-primary hover:bg-primary-light hover:text-white',
+            active: '',
+        },
     },
     success: {
         default: 'focus:ring-green-500',
-        filled: 'bg-green-500 text-white hover:bg-green-600',
-        outline:
-            'border border-green-500 text-green-500 hover:bg-green-400 hover:text-white',
+        filled: {
+            normal: 'bg-green-500 text-white hover:bg-green-600',
+            active: '',
+        },
+        outline: {
+            normal: 'border border-green-500 text-green-500 hover:bg-green-400 hover:text-white',
+            active: '',
+        },
     },
     info: {
         default: 'focus:ring-cyan-500',
-        filled: 'bg-cyan-500 text-white hover:bg-cyan-600',
-        outline:
-            'border border-cyan-500 text-cyan-500 hover:bg-cyan-400 hover:text-white',
+        filled: {
+            normal: 'bg-cyan-500 text-white hover:bg-cyan-600',
+            active: '',
+        },
+        outline: {
+            normal: 'border border-cyan-500 text-cyan-500 hover:bg-cyan-400 hover:text-white',
+            active: '',
+        },
     },
     warning: {
         default: 'focus:ring-yellow-500',
-        filled: 'bg-yellow-500 text-white hover:bg-yellow-600',
-        outline:
-            'border border-yellow-500 text-yellow-500 hover:bg-yellow-400 hover:text-white',
+        filled: {
+            normal: 'bg-yellow-500 text-white hover:bg-yellow-600',
+            active: '',
+        },
+        outline: {
+            normal: 'border border-yellow-500 text-yellow-500 hover:bg-yellow-400 hover:text-white',
+            active: '',
+        }
+
     },
     danger: {
         default: 'focus:ring-red-500',
-        filled: 'bg-red-500 text-white hover:bg-red-600',
-        outline:
-            'border border-red-500 text-red-500 hover:bg-red-400 hover:text-white',
+        filled: {
+            normal: 'bg-red-500 text-white hover:bg-red-600',
+            active: '',
+        },
+        outline: {
+            normal: 'border border-red-500 text-red-500 hover:bg-red-400 hover:text-white',
+            active: '',
+        },
     },
     white: {
         default: 'focus:ring-white',
-        filled: 'bg-white text-gray-800 hover:bg-gray-200',
-        outline:
-            'border border-white text-white hover:bg-white hover:text-gray-800',
+        filled: {
+            normal: 'bg-white text-gray-700 hover:bg-gray-200',
+        },
+        outline: {
+            normal: 'border border-white text-white hover:bg-white hover:text-gray-800',
+        },
     },
     black: {
         default: 'focus:ring-black',
-        filled: 'bg-black text-gray-300 hover:text-white hover:bg-gray-800',
-        outline:
-            'border border-black text-black hover:bg-black hover:text-white',
+        filled: {
+            normal: 'bg-black text-gray-300 hover:text-white hover:bg-gray-800',
+            active: '',
+        },
+        outline: {
+            normal: 'border border-black text-black hover:bg-black hover:text-white',
+            active: '',
+        },
     },
     link: {
         default:
             'focus:ring-blue-500 underline text-blue-600 hover:text-blue-500',
-        filled: '',
-        outline: 'border border-blue-500',
+        filled: {
+            normal: '',
+            active: '',
+        },
+        outline: {
+            normal: 'border border-blue-500',
+            active: '',
+        },
     },
     transparent: {
-        default: 'focus:ring-primary',
-        filled: 'text-gray-800 hover:text-gray-700 dark:text-gray-200 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-dark-eval-0',
-        outline: 'text-primary hover:text-primary-light',
+        default: 'focus:ring-primary text-gray-700 dark:text-gray-300',
+        filled: {
+            normal: 'hover:text-gray-800 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-dark-eval-1',
+            active: '',
+        },
+        outline: {
+            normal: 'hover:text-gray-800',
+            active: '',
+        },
     },
 }
 
@@ -78,42 +130,9 @@ const focusOffsetClasses = ['focus:ring-offset-2']
 const focusClasses = ['focus:outline-none', 'focus:ring']
 
 export const baseButtonProps = {
-    variant: {
-        type: String,
-        default: 'primary',
-        validator(value) {
-            return [
-                'primary',
-                'success',
-                'info',
-                'warning',
-                'danger',
-                'white',
-                'black',
-                'link',
-                'transparent',
-            ].includes(value)
-        },
-    },
-    size: {
-        type: String,
-        default: 'base',
-        validator(value) {
-            return ['sm', 'base', 'lg'].includes(value)
-        },
-    },
-    square: {
-        type: Boolean,
-        default: false,
-    },
-    pill: {
-        type: Boolean,
-        default: false,
-    },
-    iconOnly: {
-        type: Boolean,
-        default: false,
-    },
+    variant: variantProp({ variants: [...variants, 'link', 'transparent'] }),
+    size: sizeProp(),
+    shape: shapeProp({ shapes: shapes.filter(s => s != 'circle') }),
     outline: {
         type: Boolean,
         default: false,
@@ -123,14 +142,13 @@ export const baseButtonProps = {
 export default defineComponent({
     props: {
         ...baseButtonProps,
-
         as: {
-            // type: String,
+            // type: [String, Object],
             required: false,
             default: 'a',
         },
         to: {
-            type: [String, undefined],
+            type: [String, Object],
             default: undefined,
         },
         href: {
@@ -139,10 +157,6 @@ export default defineComponent({
         type: {
             type: String,
             default: 'submit',
-        },
-        disabled: {
-            type: Boolean,
-            default: false,
         },
         srText: {
             type: String || undefined,
@@ -181,6 +195,14 @@ export default defineComponent({
             type: Boolean,
             default: false,
         },
+        loading: {
+            type: Boolean,
+            default: false,
+        },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
         active: {
             type: Boolean,
             default: false,
@@ -192,61 +214,52 @@ export default defineComponent({
     setup(props, { slots, emit, attrs }) {
         const {
             type,
-            variant,
             size,
-            square,
-            pill,
             href,
-            iconOnly,
             srText,
             external,
             outline,
             block,
-            // icon,
             startIcon,
             endIcon,
             ringOffsetColorClass,
             noPadding,
+            shape,
         } = props
 
         const { disabled, icon, text } = toRefs(props)
 
-        const vClass = computed(() => {
-            return ''
-        })
-
         const classes = [
             ...baseClasses,
-            colorClasses[variant].default,
-            props.active && colorClasses[variant].default?.[props.active],
+            colorClasses[props.variant].default,
             outline
-                ? colorClasses[variant].outline
-                : colorClasses[variant].filled,
+                ? (props.active ? colorClasses[props.variant]?.outline?.active : colorClasses[props.variant]?.outline?.normal)
+                : (props.active ? colorClasses[props.variant]?.filled?.active : colorClasses[props.variant]?.filled?.normal),
             ...focusClasses,
             ringOffsetColorClass,
             focusOffsetClasses,
             block ? 'w-full' : null,
-            noPadding ? null : 
-            iconOnly
-                ? {
-                      'p-1.5': size == 'sm',
-                      'p-2': size == 'base',
-                      'p-3': size == 'lg',
-                  }
-                : {
-                      'px-2.5 py-1.5 text-sm': size == 'sm',
-                      'px-4 py-2 text-base': size == 'base',
-                      'px-5 py-2 text-xl': size == 'lg',
-                  },
+            noPadding ? null :
+                icon.value
+                    ? {
+                        'p-1.5': size == 'sm',
+                        'p-2': size == 'base',
+                        'p-3': size == 'lg',
+                    }
+                    : {
+                        'px-2.5 py-1.5 text-sm': size == 'sm',
+                        'px-4 py-2 text-base': size == 'base',
+                        'px-5 py-2 text-xl': size == 'lg',
+                    },
             {
-                'rounded-md': !square && !pill,
-                'rounded-full': pill,
+                'rounded-none': shape == 'square',
+                'rounded-md': shape == 'rounded',
+                'rounded-full': shape == 'pill',
             },
             {
                 'pointer-events-none opacity-50':
                     (href || props.to) && disabled.value,
             },
-            // vClasses,
         ]
 
         const iconSizeClasses = [
@@ -280,7 +293,7 @@ export default defineComponent({
                     {...attrs}
                 >
                     {srText && <span class="sr-only">{srText}</span>}
-                    {icon && iconOnly && (
+                    {icon.value && !slots.default && (
                         <Icon icon={icon.value} class={iconSizeClasses} />
                     )}
                     {startIcon && (
@@ -301,12 +314,8 @@ export default defineComponent({
                 {...attrs}
             >
                 {srText && <span class="sr-only">{srText}</span>}
-                {icon && iconOnly && (
-                    <Icon icon={icon.value} class={[
-                        iconSizeClasses,
-                        // 'fill-current',
-                        // 'stroke-current'
-                    ]} />
+                {icon.value && !slots.default && (
+                    <Icon icon={icon.value} class={iconSizeClasses} />
                 )}
                 {startIcon && <Icon icon={startIcon} class={iconSizeClasses} />}
                 {text.value ?? slots.default?.({ iconSizeClasses })}

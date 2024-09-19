@@ -1,5 +1,4 @@
 import { defineComponent, ref } from 'vue'
-import { tabs } from './data.json'
 import Avatar from './tabs/Avatar'
 import Badge from './tabs/Badge'
 import Button from './tabs/Button'
@@ -7,13 +6,35 @@ import ButtonGroup from './tabs/ButtonGroup'
 import Form from './tabs/Form'
 import Panel from './tabs/Panel'
 import Modal from './tabs/Modal'
+import { isDark, toggleDarkMode } from './composables'
 
 export default defineComponent({
     setup() {
         const activeTab = ref('Avatar')
-
+        const tabs = [
+            'Avatar',
+            'Badge',
+            'Button',
+            'ButtonGroup',
+            'Form',
+            'Panel',
+            'Modal',
+        ]
+        
         return () => (
-            <>
+            <div class={[
+                isDark.value && 'dark bg-dark-eval-0'
+            ]}>
+                <div class="p-6 flex gap-4 items-center">
+                    <KuiButton 
+                        variant="transparent"
+                        icon={isDark.value ? 'tabler:sun' : 'tabler:moon'}
+                        onClick={() => {
+                            toggleDarkMode()
+                        }}
+                    />
+                </div>
+
                 <div class="p-10">
                     <KuiButtonGroup outline variant="black">
                         {tabs.map((tab) => (
@@ -37,7 +58,7 @@ export default defineComponent({
                     <Panel v-show={activeTab.value == 'Panel'} />
                     <Modal v-show={activeTab.value == 'Modal'} />
                 </div>
-            </>
+            </div>
         )
     },
 })

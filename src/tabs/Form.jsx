@@ -21,6 +21,14 @@ export default defineComponent({
 
         return () => (
             <div>
+                <div class="p-10">
+                    <div>
+                        <kuiInput type="textarea" />
+                    </div>
+                    <div>
+                        <kuiInput rows="20" icon="tabler:user" type="textarea" />
+                    </div>
+                </div>
                 <div class="p-10 flex gap-6">
                     <kuiInput placeholder="Text" />
 

@@ -1,16 +1,19 @@
 import { defineComponent } from 'vue'
-import { types, size, variants } from '@/data.json'
+import { sizes, variants } from '@/support'
 
 export default defineComponent({
     setup() {
+        const types = ["filled", "outline"]
+        const buttonVariants = [...variants, 'link', 'transparent']
+
         return () => (
             <div>
                 <div class="p-10 flex flex-col gap-6">
                     {types.map((t) => (
                         <>
-                            {size.map((s) => (
+                            {sizes.map((s) => (
                                 <>
-                                    {variants.map((v) => (
+                                    {buttonVariants.map((v) => (
                                         <div class="flex flex-col gap-2">
                                             <KuiButtonGroup
                                                 outline={t == 'outline'}

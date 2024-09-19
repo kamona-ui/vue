@@ -1,30 +1,38 @@
-const sizes = ['sm', 'base', 'lg']
-const shapes = ['square', 'rounded', 'pill', 'circle']
-const variants = ['default', 'primary', 'success', 'info', 'warning', 'danger', 'white', 'black']
+const baseSizes = ['sm', 'base', 'lg']
+const baseShapes = ['square', 'rounded', 'pill', 'circle']
+const baseVariants = ['primary', 'success', 'info', 'warning', 'danger', 'white', 'black']
+const basePositions = ['tr', 'tl', 'br', 'bl']
 
-const sizeProp = {
+const sizeProp = ({ defaultSizes = 'base', sizes = baseSizes } = {}) => ({
     type: String,
-    default: 'base',
+    default: defaultSizes,
     validator(value) {
         return sizes.includes(value)
     },
-}
+})
 
-const shapeProp = {
+const shapeProp = ({ defaultShape = 'rounded', shapes = baseShapes } = {}) => ({
     type: String,
-    default: 'rounded',
+    default: defaultShape,
     validator(value) {
         return shapes.includes(value)
     },
-}
+})
 
-const variantProp = {
+const positionProp = ({ defaultShape = 'tr', positions = basePositions } = {}) => ({
     type: String,
-    default: 'primary',
+    default: defaultShape,
+    validator(value) {
+        return positions.includes(value)
+    },
+})
+
+const variantProp = ({ defaultVariant = 'primary', variants = baseVariants } = {}) => ({
+    type: String,
+    default: defaultVariant,
     validator(value) {
         return variants.includes(value)
     }
-}
+})
 
-
-export { sizes, shapes, variants, sizeProp, shapeProp, variantProp }
+export { baseSizes as sizes, baseShapes as shapes, baseVariants as variants, basePositions as positions, sizeProp, shapeProp, variantProp, positionProp }

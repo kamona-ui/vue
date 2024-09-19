@@ -27,6 +27,17 @@ export default {
                     'eval-3': '#2C3142',
                 },
             },
+
+            keyframes: {
+                rotate: {
+                    '100%': { transform: 'rotate(1turn)' },
+                }
+            },
+
+            animation: { 
+                rotate: 'rotate 4s infinite linear',
+                'rotate-reverse': 'rotate 4s infinite linear reverse',
+            },
         },
     },
     plugins: [forms],

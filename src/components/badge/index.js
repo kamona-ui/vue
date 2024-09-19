@@ -1,4 +1,1 @@
-import Badge from './Badge'
-import { Dot } from './Badge'
-
-export { Badge, Dot }
+export { default as Badge, Dot } from './Badge'

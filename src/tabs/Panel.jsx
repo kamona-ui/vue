@@ -40,7 +40,7 @@ import {
 
 export default defineComponent({
     setup() {
-        const showRightPanel = ref(true)
+        const showRightPanel = ref(false)
         const showLeftPanel = ref(false)
 
         return () => (
