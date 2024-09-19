@@ -1,16 +1,48 @@
 import { defineComponent } from 'vue'
-import { types, size, variants } from '@/data.json'
+import { sizes, variants } from '@/support'
 
 export default defineComponent({
     setup() {
+        const types = ['filled', 'outline']
+        const buttonVariants = [...variants, 'link', 'transparent']
+
         return () => (
             <div>
+                <div class="p-10">
+                    <KuiDropdown
+                        align="left"
+                        width="48"
+                        v-slots={{
+                            trigger: () => (
+                                <KuiButton
+                                    variant="transparent"
+                                    text="User Name"
+                                    end-icon="tabler:chevron-down"
+                                />
+                            ),
+
+                            content: () => (
+                                <>
+                                    <KuiDropdownItem href="#" title="Profile" />
+
+                                    <KuiDropdownItem
+                                        href="#"
+                                        method="post"
+                                        as="button"
+                                        title="Log Out"
+                                    />
+                                </>
+                            ),
+                        }}
+                    />
+                </div>
+
                 <div class="p-10 flex flex-col gap-6">
                     {types.map((t) => (
                         <div class="flex flex-col gap-2">
-                            {size.map((s) => (
+                            {sizes.map((s) => (
                                 <div class="flex gap-2">
-                                    {variants.map((v) => (
+                                    {buttonVariants.map((v) => (
                                         <KuiButton
                                             outline={t == 'outline'}
                                             variant={v}
@@ -29,9 +61,9 @@ export default defineComponent({
                 <div class="p-10 flex flex-col gap-6">
                     {types.map((t) => (
                         <div class="flex flex-col gap-2">
-                            {size.map((s) => (
+                            {sizes.map((s) => (
                                 <div class="flex gap-2">
-                                    {variants.map((v) => (
+                                    {buttonVariants.map((v) => (
                                         <KuiButton
                                             icon-only
                                             outline={t == 'outline'}
@@ -50,9 +82,9 @@ export default defineComponent({
                 <div class="p-10 flex flex-col gap-6">
                     {types.map((t) => (
                         <div class="flex flex-col gap-2">
-                            {size.map((s) => (
+                            {sizes.map((s) => (
                                 <div class="flex gap-2">
-                                    {variants.map((v) => (
+                                    {buttonVariants.map((v) => (
                                         <KuiButton
                                             outline={t == 'outline'}
                                             variant={v}

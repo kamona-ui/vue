@@ -23,7 +23,15 @@ export default defineConfig({
         },
 
         rollupOptions: {
-            external: ['vue', 'tailwindcss', '@headlessui/vue', '@iconify/vue'],
+            external: ['vue', 'tailwindcss', '@headlessui/vue', '@iconify/vue', 'flatpickr'],
+            
+            output: {
+                assetFileNames: (chunkInfo) => {
+                    if (/css$/.test(chunkInfo.name)) {
+                        return `kui-vue.css`
+                    }
+                }
+            },
         },
 
         sourcemap: true,

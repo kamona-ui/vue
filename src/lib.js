@@ -1,32 +1,23 @@
-import './css/style.css'
+import * as components from './components'
+import '@/css/main.css'
+// import '@/css/tailwind.css'
 
-import {
-    Avatar,
-    Badge,
-    Dot,
-    Button,
-    ButtonGroup,
-    Input,
-    Label,
-    Checkbox,
-    DatePicker,
-    Panel,
-    Modal,
+export {
+    Avatar as KuiAvatar,
+    Badge as KuiBadge,
+    Dot as KuiDot,
+    Button as KuiButton,
+    ButtonGroup as KuiButtonGroup,
+    Dropdown as KuiDropdown,
+    DropdownItem as KuiDropdownItem,
+    Input as KuiInput,
+    Label as KuiLabel,
+    Checkbox as KuiCheckbox,
+    DatePicker as KuiDatePicker,
+    Panel as KuiPanel,
+    Modal as KuiModal,
+    Loading as KuiLoading,
 } from './components'
-
-const components = {
-    Avatar,
-    Badge,
-    Dot,
-    Button,
-    ButtonGroup,
-    Input,
-    Label,
-    Checkbox,
-    DatePicker,
-    Panel,
-    Modal,
-}
 
 function install(Vue) {
     for (const component in components) {
@@ -35,17 +26,3 @@ function install(Vue) {
 }
 
 export default install
-
-export {
-    Avatar as KuiAvatar,
-    Badge as KuiBadge,
-    Dot as KuiDot,
-    Button as KuiButton,
-    ButtonGroup as KuiButtonGroup,
-    Input as KuiInput,
-    Label as KuiLabel,
-    Checkbox as KuiCheckbox,
-    DatePicker as KuiDatePicker,
-    Panel as KuiPanel,
-    Modal as KuiModal,
-}

@@ -1,6 +1,4 @@
-import Input from './Input'
-import Label from './Label'
-import Checkbox from './Checkbox'
-import DatePicker from './DatePicker'
-
-export { Input, Label, Checkbox, DatePicker }
+export { default as Input } from './Input'
+export { default as Label } from './Label'
+export { default as Checkbox } from './Checkbox'
+export { default as DatePicker } from './DatePicker'
