@@ -108,7 +108,8 @@ const colorClasses = {
         // filled: '*:bg-red-500 *:text-white *:border-red-600',
         // outline: '*:border-red-500 *:text-red-500 hover:*:text-white',
 
-        default: 'focus:*:ring-blue-500 *:underline *:text-blue-600 hover:*:text-blue-500',
+        default:
+            'focus:*:ring-blue-500 *:underline *:text-blue-600 hover:*:text-blue-500',
         filled: {
             normal: '*:border-blue-500',
             active: '',
@@ -142,7 +143,7 @@ const ButtonGroup = defineComponent({
         iconOnly: {
             type: Boolean,
             default: false,
-        }
+        },
     },
 
     setup(props, { slots }) {
@@ -155,8 +156,10 @@ const ButtonGroup = defineComponent({
         const childrenClasses = [
             ...baseClasses,
             {
-                'first:*:rounded-s-lg last:*:rounded-e-lg': props.shape == 'rounded',
-                'first:*:rounded-s-full last:*:rounded-e-full': props.shape == 'pill',
+                'first:*:rounded-s-lg last:*:rounded-e-lg':
+                    props.shape == 'rounded',
+                'first:*:rounded-s-full last:*:rounded-e-full':
+                    props.shape == 'pill',
             },
             defaultColorClasses,
             cClasses,
@@ -172,11 +175,7 @@ const ButtonGroup = defineComponent({
         ]
 
         return () => (
-            <div class={[
-                    'inline-flex items-stretch', 
-                    ...childrenClasses
-                ]}
-            >
+            <div class={['inline-flex items-stretch', ...childrenClasses]}>
                 {slots.default?.()}
             </div>
         )

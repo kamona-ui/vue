@@ -28,7 +28,7 @@ const colorClasses = {
         default: 'focus:ring-primary',
         filled: {
             normal: 'bg-primary text-white hover:bg-primary-dark',
-            active: 'bg-primary-600'
+            active: 'bg-primary-600',
         },
         outline: {
             normal: 'border border-primary text-primary hover:bg-primary-light hover:text-white',
@@ -66,8 +66,7 @@ const colorClasses = {
         outline: {
             normal: 'border border-yellow-500 text-yellow-500 hover:bg-yellow-400 hover:text-white',
             active: '',
-        }
-
+        },
     },
     danger: {
         default: 'focus:ring-red-500',
@@ -132,7 +131,7 @@ const focusClasses = ['focus:outline-none', 'focus:ring']
 export const baseButtonProps = {
     variant: variantProp({ variants: [...variants, 'link', 'transparent'] }),
     size: sizeProp(),
-    shape: shapeProp({ shapes: shapes.filter(s => s != 'circle') }),
+    shape: shapeProp({ shapes: shapes.filter((s) => s != 'circle') }),
     outline: {
         type: Boolean,
         default: false,
@@ -206,7 +205,7 @@ export default defineComponent({
         active: {
             type: Boolean,
             default: false,
-        }
+        },
     },
 
     emits: ['click'],
@@ -233,20 +232,25 @@ export default defineComponent({
             ...baseClasses,
             colorClasses[props.variant].default,
             outline
-                ? (props.active ? colorClasses[props.variant]?.outline?.active : colorClasses[props.variant]?.outline?.normal)
-                : (props.active ? colorClasses[props.variant]?.filled?.active : colorClasses[props.variant]?.filled?.normal),
+                ? props.active
+                    ? colorClasses[props.variant]?.outline?.active
+                    : colorClasses[props.variant]?.outline?.normal
+                : props.active
+                  ? colorClasses[props.variant]?.filled?.active
+                  : colorClasses[props.variant]?.filled?.normal,
             ...focusClasses,
             ringOffsetColorClass,
             focusOffsetClasses,
             block ? 'w-full' : null,
-            noPadding ? null :
-                icon.value
-                    ? {
+            noPadding
+                ? null
+                : icon.value
+                  ? {
                         'p-1.5': size == 'sm',
                         'p-2': size == 'base',
                         'p-3': size == 'lg',
                     }
-                    : {
+                  : {
                         'px-2.5 py-1.5 text-sm': size == 'sm',
                         'px-4 py-2 text-base': size == 'base',
                         'px-5 py-2 text-xl': size == 'lg',

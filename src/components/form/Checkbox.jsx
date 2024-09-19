@@ -14,7 +14,7 @@ export default defineComponent({
         },
         label: {
             type: [String, undefined],
-            default: undefined
+            default: undefined,
         },
     },
 
@@ -28,9 +28,7 @@ export default defineComponent({
         const isChecked = ref(checked)
 
         return () => (
-            <Label
-                class="inline-flex items-center gap-2"
-            >
+            <Label class="inline-flex items-center gap-2">
                 <input
                     {...attrs}
                     type="checkbox"
@@ -47,7 +45,7 @@ export default defineComponent({
                             'transform scale-110': props.size == 'sm',
                             'transform scale-125': props.size == 'base',
                             'transform scale-150': props.size == 'lg',
-                        }
+                        },
                     ]}
                     value={value}
                     v-model={isChecked.value}
@@ -56,11 +54,7 @@ export default defineComponent({
                     }}
                 />
 
-                {label && (
-                    <span class="text-sm">
-                        {label}
-                    </span>
-                )}
+                {label && <span class="text-sm">{label}</span>}
             </Label>
         )
     },

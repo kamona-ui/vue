@@ -32,7 +32,6 @@ export const DropdownItem = defineComponent({
     },
 })
 
-
 export default defineComponent({
     props: {
         align: {
@@ -65,9 +64,7 @@ export default defineComponent({
 
         return () => (
             <Menu as="div" class="relative max-w-max">
-                <MenuButton as="span">
-                    {slots.trigger?.()}
-                </MenuButton>
+                <MenuButton as="span">{slots.trigger?.()}</MenuButton>
 
                 <Transition
                     enterActiveClass="transition ease-out duration-200"
@@ -82,16 +79,11 @@ export default defineComponent({
                             'absolute z-50 mt-2 rounded-md shadow-lg',
                             'focus:outline-none focus:ring-1 focus:ring-primary focus:ring-opacity-5',
                             // widthClass.value,
-                            'min-w-full', 
+                            'min-w-full',
                             alignmentClasses.value,
                         ]}
                     >
-                        <div
-                            class={[
-                                'rounded-md',
-                                props.contentClasses,
-                            ]}
-                        >
+                        <div class={['rounded-md', props.contentClasses]}>
                             {slots.content?.()}
                         </div>
                     </MenuItems>

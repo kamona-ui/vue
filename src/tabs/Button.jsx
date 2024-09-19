@@ -3,7 +3,7 @@ import { sizes, variants } from '@/support'
 
 export default defineComponent({
     setup() {
-        const types = ["filled", "outline"]
+        const types = ['filled', 'outline']
         const buttonVariants = [...variants, 'link', 'transparent']
 
         return () => (
@@ -23,10 +23,7 @@ export default defineComponent({
 
                             content: () => (
                                 <>
-                                    <KuiDropdownItem
-                                        href="#"
-                                        title="Profile"
-                                    />
+                                    <KuiDropdownItem href="#" title="Profile" />
 
                                     <KuiDropdownItem
                                         href="#"

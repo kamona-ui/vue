@@ -79,7 +79,7 @@ export default defineComponent({
                                     : 'translate-x-full'
                             }
                         >
-                            <div 
+                            <div
                                 class={[
                                     width,
                                     'fixed inset-y-0 flex',

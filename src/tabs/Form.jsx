@@ -5,19 +5,15 @@ export default defineComponent({
         const today = ref()
 
         const variants = [
-            "primary",
-            "success",
-            "info",
-            "warning",
-            "danger",
-            "black",
+            'primary',
+            'success',
+            'info',
+            'warning',
+            'danger',
+            'black',
         ]
 
-        const sizes = [
-            'sm',
-            'base',
-            'lg'
-        ]
+        const sizes = ['sm', 'base', 'lg']
 
         return () => (
             <div>
@@ -26,7 +22,11 @@ export default defineComponent({
                         <kuiInput type="textarea" />
                     </div>
                     <div>
-                        <kuiInput rows="20" icon="tabler:user" type="textarea" />
+                        <kuiInput
+                            rows="20"
+                            icon="tabler:user"
+                            type="textarea"
+                        />
                     </div>
                 </div>
                 <div class="p-10 flex gap-6">
@@ -36,20 +36,24 @@ export default defineComponent({
                 </div>
 
                 <div class="p-10 flex flex-wrap gap-6">
-                    {variants.map(v => (
+                    {variants.map((v) => (
                         <kuiInput variant={v} placeholder="Text" />
                     ))}
                 </div>
 
                 <div class="p-10 flex flex-wrap gap-6">
-                    {sizes.map(s => (
+                    {sizes.map((s) => (
                         <kuiInput size={s} placeholder="Text" />
                     ))}
                 </div>
 
                 <div class="p-10 flex flex-wrap gap-6">
-                    {sizes.map(s => (
-                        <kuiInput icon="tabler:user" size={s} placeholder="Text" />
+                    {sizes.map((s) => (
+                        <kuiInput
+                            icon="tabler:user"
+                            size={s}
+                            placeholder="Text"
+                        />
                     ))}
                 </div>
 
@@ -69,7 +73,7 @@ export default defineComponent({
                 </div>
 
                 <div class="p-10 flex gap-6">
-                    {sizes.map(s => (
+                    {sizes.map((s) => (
                         <kuiCheckbox size={s} />
                     ))}
                 </div>

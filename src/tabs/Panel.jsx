@@ -4,22 +4,22 @@ import {
     ListboxButton,
     ListboxOptions,
     ListboxOption,
-  } from '@headlessui/vue'
+} from '@headlessui/vue'
 
-  const Select = defineComponent({
+const Select = defineComponent({
     props: {},
 
     setup() {
         const types = [
             { id: 1, name: 'Base' },
             { id: 2, name: 'Auth' },
-          ]
-          const selectedType = ref(types[0])
-        
+        ]
+        const selectedType = ref(types[0])
+
         return () => (
             <Listbox v-model={selectedType.value}>
                 <ListboxButton as="template">
-                    <KuiButton 
+                    <KuiButton
                         outline
                         text={`type: ${selectedType.value.name}`}
                         variant="black"
@@ -27,7 +27,7 @@ import {
                 </ListboxButton>
 
                 <ListboxOptions>
-                    {types.map(p => (
+                    {types.map((p) => (
                         <ListboxOption value={p} key={p.id}>
                             {p.name}
                         </ListboxOption>
@@ -35,8 +35,8 @@ import {
                 </ListboxOptions>
             </Listbox>
         )
-    }
-  })
+    },
+})
 
 export default defineComponent({
     setup() {
@@ -53,11 +53,7 @@ export default defineComponent({
                     }}
                     width="w-screen md:max-w-[880px]"
                     v-slots={{
-                        footer: () => (
-                            <div class="p-4">
-                                Footer
-                            </div>
-                        )
+                        footer: () => <div class="p-4">Footer</div>,
                     }}
                 >
                     {/* {Array(50).fill('').map(_ => (
@@ -65,10 +61,7 @@ export default defineComponent({
                     ))} */}
 
                     <div class="flex items-end gap-4">
-                        <KuiInput 
-                            label="Name"
-                            placeholder="eg `posts`"
-                        />
+                        <KuiInput label="Name" placeholder="eg `posts`" />
 
                         <div class="flex-shrink-0 relative">
                             <Select />

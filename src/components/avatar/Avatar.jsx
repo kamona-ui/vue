@@ -1,16 +1,26 @@
 import { defineComponent } from 'vue'
 import { Icon } from '@iconify/vue'
-import { positionProp, shapeProp, shapes, sizeProp, sizes, variantProp } from '@/support'
+import {
+    positionProp,
+    shapeProp,
+    shapes,
+    sizeProp,
+    sizes,
+    variantProp,
+} from '@/support'
 
 const AvatarStatus = defineComponent({
     props: {
-        variant: variantProp({ defaultVariant: 'success', variants: ['success', 'danger'] }),
+        variant: variantProp({
+            defaultVariant: 'success',
+            variants: ['success', 'danger'],
+        }),
         avatarShape: shapeProp({ defaultShape: 'circle' }),
         shape: shapeProp({ defaultShape: 'circle' }),
         avatarSize: sizeProp({ sizes: ['xs', ...sizes, 'xl', '2xl'] }),
         bordered: {
             type: Boolean,
-            default: false
+            default: false,
         },
         position: positionProp(),
     },
@@ -87,52 +97,62 @@ const AvatarStatus = defineComponent({
                     'col-[1/1] row-[1/1]',
                     'flex',
                     positionClasses[props.position],
-                    props.avatarShape == 'circle' 
-                        ? positionMarginClasses[props.position]?.circle?.[props.avatarSize]
+                    props.avatarShape == 'circle'
+                        ? positionMarginClasses[props.position]?.circle?.[
+                              props.avatarSize
+                          ]
                         : positionMarginClasses[props.position]?.default,
                 ]}
             >
-                <div class={[
-                    'w-4 h-4',
-                    'ring ring-white dark:ring-dark-eval-0',
-                    colorClasses[props.variant],
-                    shapeClasses[props.shape],
-                ]}></div>
+                <div
+                    class={[
+                        'w-4 h-4',
+                        'ring ring-white dark:ring-dark-eval-0',
+                        colorClasses[props.variant],
+                        shapeClasses[props.shape],
+                    ]}
+                ></div>
             </div>
         )
-    }
+    },
 })
 
 export default defineComponent({
     props: {
         variant: variantProp(),
         size: sizeProp({ sizes: ['xs', ...sizes, 'xl', '2xl'] }),
-        shape: shapeProp({ shapes: shapes.filter(s => s != 'pill') }),
+        shape: shapeProp({ shapes: shapes.filter((s) => s != 'pill') }),
         src: String,
         alt: String,
         status: {
             type: String,
             default: null,
         },
-        statusVariant: variantProp({ defaultVariant: 'success', variants: ['success', 'danger'] }),
+        statusVariant: variantProp({
+            defaultVariant: 'success',
+            variants: ['success', 'danger'],
+        }),
         statusPosition: positionProp(),
-        statusShape: shapeProp({ defaultShape: 'circle', shapes: shapes.filter(s => s != 'pill') }),
+        statusShape: shapeProp({
+            defaultShape: 'circle',
+            shapes: shapes.filter((s) => s != 'pill'),
+        }),
         bordered: {
             type: Boolean,
-            default: false
+            default: false,
         },
         ringColorClass: {
             type: String,
-            default: 'ring-primary'
+            default: 'ring-primary',
         },
         placeholder: {
             type: Boolean,
-            default: false
+            default: false,
         },
         icon: {
             type: String,
-            default: 'tabler:user'
-        }
+            default: 'tabler:user',
+        },
     },
 
     setup(props) {
@@ -162,22 +182,20 @@ export default defineComponent({
         }
 
         return () => (
-            <div class={[
-                'grid aspect-square max-w-max',
-                sizesClasses,
-                shapeClasses,
-                {
-                    'bg-gray-200 dark:bg-gray-800': !props.src,
-                    'ring ring-offset-2 dark:ring-offset-dark-eval-0': props.bordered,
-                    [broderColorClasses[props.variant]]: props.bordered
-                },
-            ]}>
-
-                <div
-                    class={[
-                        'col-[1/1] row-[1/1]'
-                    ]}
-                >
+            <div
+                class={[
+                    'grid aspect-square max-w-max',
+                    sizesClasses,
+                    shapeClasses,
+                    {
+                        'bg-gray-200 dark:bg-gray-800': !props.src,
+                        'ring ring-offset-2 dark:ring-offset-dark-eval-0':
+                            props.bordered,
+                        [broderColorClasses[props.variant]]: props.bordered,
+                    },
+                ]}
+            >
+                <div class={['col-[1/1] row-[1/1]']}>
                     {props.src ? (
                         <img
                             class={[
@@ -189,18 +207,21 @@ export default defineComponent({
                             alt={props.alt}
                         />
                     ) : (
-                        <Icon icon={props.icon} class={[
-                            'w-full h-full dark:text-gray-200',
-                            sizesClasses
-                        ]} />
+                        <Icon
+                            icon={props.icon}
+                            class={[
+                                'w-full h-full dark:text-gray-200',
+                                sizesClasses,
+                            ]}
+                        />
                     )}
                 </div>
 
-                <AvatarStatus 
-                    avatar-shape={props.shape} 
-                    shape={props.statusShape} 
-                    avatar-size={props.size} 
-                    position={props.statusPosition} 
+                <AvatarStatus
+                    avatar-shape={props.shape}
+                    shape={props.statusShape}
+                    avatar-size={props.size}
+                    position={props.statusPosition}
                     variant={props.statusVariant}
                 />
             </div>

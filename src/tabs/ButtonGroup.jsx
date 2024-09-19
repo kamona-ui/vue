@@ -3,7 +3,7 @@ import { sizes, variants } from '@/support'
 
 export default defineComponent({
     setup() {
-        const types = ["filled", "outline"]
+        const types = ['filled', 'outline']
         const buttonVariants = [...variants, 'link', 'transparent']
 
         return () => (

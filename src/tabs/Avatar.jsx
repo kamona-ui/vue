@@ -4,9 +4,9 @@ import { positions, shapes, sizes } from '@/support'
 
 export default defineComponent({
     setup() {
-        const avatarShapes = shapes.filter(s => s != 'pill')
+        const avatarShapes = shapes.filter((s) => s != 'pill')
         const avatarSizes = ['xs', ...sizes, 'xl', '2xl']
-        
+
         return () => (
             <div>
                 {avatarShapes.map((shape) => (
@@ -25,10 +25,7 @@ export default defineComponent({
                 {avatarShapes.map((shape) => (
                     <div class="p-10 flex gap-6">
                         {avatarSizes.map((s) => (
-                            <KuiAvatar
-                                size={s}
-                                shape={shape}
-                            />
+                            <KuiAvatar size={s} shape={shape} />
                         ))}
                     </div>
                 ))}
@@ -50,11 +47,7 @@ export default defineComponent({
                 {avatarShapes.map((shape) => (
                     <div class="p-10 flex gap-6">
                         {avatarSizes.map((s) => (
-                            <KuiAvatar
-                                size={s}
-                                shape={shape}
-                                bordered
-                            />
+                            <KuiAvatar size={s} shape={shape} bordered />
                         ))}
                     </div>
                 ))}

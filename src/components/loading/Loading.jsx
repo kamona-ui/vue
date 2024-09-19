@@ -4,15 +4,15 @@ export default defineComponent({
     props: {
         width: {
             type: String,
-            default: 'w-6'
+            default: 'w-6',
         },
         fgColor: {
             type: String,
-            default: 'white'
+            default: 'white',
         },
         bgColor: {
             type: String,
-            default: 'white'
+            default: 'white',
         },
     },
 
@@ -26,31 +26,26 @@ export default defineComponent({
                         '--loading-fg-mask': '#000 0 36deg, #0000 0 72deg',
                         '--loading-bg-mask': '#0000 0 36deg, #000 0 72deg',
                     }}
-                    class={[
-                        'grid aspect-square', 
-                        props.width
-                    ]}
+                    class={['grid aspect-square', props.width]}
                 >
-                    <div 
+                    <div
                         class={[
                             'col-[1/1] row-[1/1] rounded-[50%]',
                             'animate-rotate',
                             'bg-[repeating-radial-gradient(farthest-side,#0000_0%,var(--loading-fg-color)_1%_10%,#0000_11%_30%)]',
                             '[mask:repeating-conic-gradient(var(--loading-fg-mask))]',
                         ]}
-                    >
-                    </div>
-                    <div 
+                    ></div>
+                    <div
                         class={[
                             'col-[1/1] row-[1/1] rounded-[50%]',
                             'animate-rotate-reverse',
                             'bg-[repeating-radial-gradient(farthest-side,#0000_0%,var(--loading-bg-color)_1%_10%,#0000_11%_30%)]',
-                            '[mask:repeating-conic-gradient(var(--loading-bg-mask))]'
+                            '[mask:repeating-conic-gradient(var(--loading-bg-mask))]',
                         ]}
-                    >
-                    </div>
+                    ></div>
                 </div>
             </div>
         )
-    }
+    },
 })

@@ -20,13 +20,11 @@ export default defineComponent({
             'Panel',
             'Modal',
         ]
-        
+
         return () => (
-            <div class={[
-                isDark.value && 'dark bg-dark-eval-0'
-            ]}>
+            <div class={[isDark.value && 'dark bg-dark-eval-0']}>
                 <div class="p-6 flex gap-4 items-center">
-                    <KuiButton 
+                    <KuiButton
                         variant="transparent"
                         icon={isDark.value ? 'tabler:sun' : 'tabler:moon'}
                         onClick={() => {
