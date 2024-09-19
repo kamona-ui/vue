@@ -21,6 +21,21 @@ export default defineComponent({
             'Modal',
         ]
 
+        const themeMainColors = [
+            'purple',
+            'fuchsia',
+            'violet',
+            'teal',
+            'lime',
+        ]
+
+        const changeMainColor = (color) => {
+            const root = document.documentElement
+            root.style.setProperty('--color-primary-light', `var(--color-${color}-light)`)
+            root.style.setProperty('--color-primary', `var(--color-${color})`)
+            root.style.setProperty('--color-primary-dark', `var(--color-${color}-dark)`)
+        }
+
         return () => (
             <div class={[isDark.value && 'dark bg-dark-eval-0']}>
                 <div class="p-6 flex gap-4 items-center">
@@ -31,6 +46,21 @@ export default defineComponent({
                             toggleDarkMode()
                         }}
                     />
+
+                    <div class="flex gap-4">
+                        {themeMainColors.map(c => (
+                            <button
+                                style={{
+                                    backgroundColor: `var(--color-${c})`
+                                }}
+                                type="button"
+                                class="w-6 h-6 rounded-full"
+                                onClick={() => {
+                                    changeMainColor(c)
+                                }}
+                            ></button>
+                        ))}
+                    </div>
                 </div>
 
                 <div class="p-10">
