@@ -1,6 +1,6 @@
 import { defineComponent, toRefs } from 'vue'
 import { Icon } from '@iconify/vue'
-import { shapeProp, shapes, sizeProp, variantProp, variants } from '@/support'
+import { shapeProp, shapes, sizeProp, sizes, variantProp, variants } from '@/support'
 
 // TODO: Handle active button style
 // TODO: handle link components `router-link, ...`
@@ -11,7 +11,7 @@ const baseClasses = [
     'justify-center',
     'gap-2',
     'transition',
-    'duration-150',
+    'duration-300',
     'ease-in-out',
     'min-w-max',
     'font-medium',
@@ -114,7 +114,7 @@ const colorClasses = {
     transparent: {
         default: 'focus:ring-primary text-gray-700 dark:text-gray-300',
         filled: {
-            normal: 'hover:text-gray-800 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-dark-eval-1',
+            normal: 'hover:text-gray-800 dark:hover:text-gray-100 hover:bg-gray-200 dark:hover:bg-dark-eval-1',
             active: '',
         },
         outline: {
@@ -130,7 +130,7 @@ const focusClasses = ['focus:outline-none', 'focus:ring']
 
 export const baseButtonProps = {
     variant: variantProp({ variants: [...variants, 'link', 'transparent'] }),
-    size: sizeProp(),
+    size: sizeProp({ sizes: ['xs', ...sizes] }),
     shape: shapeProp({ shapes: shapes.filter((s) => s != 'circle') }),
     outline: {
         type: Boolean,
@@ -190,7 +190,7 @@ export default defineComponent({
             default:
                 'focus:ring-offset-white dark:focus:ring-offset-dark-eval-2',
         },
-        noPadding: {
+        slim: {
             type: Boolean,
             default: false,
         },
@@ -222,7 +222,7 @@ export default defineComponent({
             startIcon,
             endIcon,
             ringOffsetColorClass,
-            noPadding,
+            slim,
             shape,
         } = props
 
@@ -230,7 +230,7 @@ export default defineComponent({
 
         const classes = [
             ...baseClasses,
-            colorClasses[props.variant].default,
+            colorClasses[props.variant]?.default,
             outline
                 ? props.active
                     ? colorClasses[props.variant]?.outline?.active
@@ -242,15 +242,17 @@ export default defineComponent({
             ringOffsetColorClass,
             focusOffsetClasses,
             block ? 'w-full' : null,
-            noPadding
+            slim
                 ? null
                 : icon.value
                   ? {
+                        'p-1': size == 'xs',
                         'p-1.5': size == 'sm',
                         'p-2': size == 'base',
                         'p-3': size == 'lg',
                     }
                   : {
+                        'px-2 py-1 text-xs': size == 'xs',
                         'px-2.5 py-1.5 text-sm': size == 'sm',
                         'px-4 py-2 text-base': size == 'base',
                         'px-5 py-2 text-xl': size == 'lg',
@@ -268,6 +270,7 @@ export default defineComponent({
 
         const iconSizeClasses = [
             {
+                'w-4 h-4': size == 'xs',
                 'w-5 h-5': size == 'sm',
                 'w-6 h-6': size == 'base',
                 'w-7 h-7': size == 'lg',

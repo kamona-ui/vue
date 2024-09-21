@@ -23,8 +23,8 @@ export default defineConfig({
         },
 
         rollupOptions: {
-            external: ['vue', 'tailwindcss', '@headlessui/vue', '@iconify/vue', 'flatpickr'],
-            
+            external: ['vue', 'tailwindcss', '@headlessui/vue', '@iconify/vue', 'flatpickr', 'vue-toastification'],
+
             output: {
                 assetFileNames: (chunkInfo) => {
                     if (/css$/.test(chunkInfo.name)) {

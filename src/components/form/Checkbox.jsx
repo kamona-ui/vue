@@ -22,7 +22,7 @@ export default defineComponent({
 
     emits: ['update:checked'],
 
-    setup(props, { emit, attrs }) {
+    setup(props, { slots, emit, attrs }) {
         const { value, checked, label } = props
 
         const isChecked = ref(checked)
@@ -54,7 +54,7 @@ export default defineComponent({
                     }}
                 />
 
-                {label && <span class="text-sm">{label}</span>}
+                {slots.default ? slots.default() : (label && <span class="text-sm">{label}</span>)}
             </Label>
         )
     },

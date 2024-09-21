@@ -12,20 +12,24 @@ export const DropdownItem = defineComponent({
         return () => (
             <MenuItem class="w-full">
                 {({ active, disabled }) => (
-                    <button
-                        type="button"
-                        {...attrs}
-                        class={[
-                            'block w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 transition duration-75 ease-in-out  focus:outline-none  dark:text-gray-400',
-                            {
-                                'bg-gray-100 dark:text-white dark:bg-dark-eval-3':
-                                    active,
-                                'pointer-events-none': disabled,
-                            },
-                        ]}
-                    >
-                        {slots.default ?? props.title}
-                    </button>
+                    <>
+                        {slots.default ? slots.default?.() : (
+                            <button
+                                type="button"
+                                {...attrs}
+                                class={[
+                                    'block w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 transition duration-75 ease-in-out  focus:outline-none  dark:text-gray-400',
+                                    {
+                                        'bg-gray-100 dark:text-white dark:bg-dark-eval-3':
+                                            active,
+                                        'pointer-events-none': disabled,
+                                    },
+                                ]}
+                            >
+                                {props.title}
+                            </button>
+                        )}
+                    </>
                 )}
             </MenuItem>
         )

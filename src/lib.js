@@ -1,5 +1,6 @@
 import * as components from './components'
-// import '@/css/main.css'
+import Toast from 'vue-toastification'
+import '@/css/main.css'
 
 export {
     Avatar as KuiAvatar,
@@ -18,10 +19,21 @@ export {
     Loading as KuiLoading,
 } from './components'
 
+export * as toast from './components/toast'
+
 function install(Vue) {
     for (const component in components) {
         Vue.component(`Kui${component}`, components[component])
     }
+
+    Vue.use(Toast, {
+        hideProgressBar: true,
+        closeOnClick: false,
+        closeButton: false,
+        icon: false,
+        timeout: false,
+        transition: 'Vue-Toastification__fade',
+    })
 }
 
 export default install

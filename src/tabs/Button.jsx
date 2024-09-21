@@ -5,6 +5,7 @@ export default defineComponent({
     setup() {
         const types = ['filled', 'outline']
         const buttonVariants = [...variants, 'link', 'transparent']
+        const buttonSizes = ['xs', ...sizes]
 
         return () => (
             <div>
@@ -40,7 +41,7 @@ export default defineComponent({
                 <div class="p-10 flex flex-col gap-6">
                     {types.map((t) => (
                         <div class="flex flex-col gap-2">
-                            {sizes.map((s) => (
+                            {buttonSizes.map((s) => (
                                 <div class="flex gap-2">
                                     {buttonVariants.map((v) => (
                                         <KuiButton
@@ -61,7 +62,7 @@ export default defineComponent({
                 <div class="p-10 flex flex-col gap-6">
                     {types.map((t) => (
                         <div class="flex flex-col gap-2">
-                            {sizes.map((s) => (
+                            {buttonSizes.map((s) => (
                                 <div class="flex gap-2">
                                     {buttonVariants.map((v) => (
                                         <KuiButton
@@ -82,7 +83,7 @@ export default defineComponent({
                 <div class="p-10 flex flex-col gap-6">
                     {types.map((t) => (
                         <div class="flex flex-col gap-2">
-                            {sizes.map((s) => (
+                            {buttonSizes.map((s) => (
                                 <div class="flex gap-2">
                                     {buttonVariants.map((v) => (
                                         <KuiButton

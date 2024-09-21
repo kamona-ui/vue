@@ -18,11 +18,11 @@ const AvatarStatus = defineComponent({
         avatarShape: shapeProp({ defaultShape: 'circle' }),
         shape: shapeProp({ defaultShape: 'circle' }),
         avatarSize: sizeProp({ sizes: ['xs', ...sizes, 'xl', '2xl'] }),
+        position: positionProp(),
         bordered: {
             type: Boolean,
             default: false,
         },
-        position: positionProp(),
     },
 
     setup(props) {
@@ -125,8 +125,8 @@ export default defineComponent({
         src: String,
         alt: String,
         status: {
-            type: String,
-            default: null,
+            type: Boolean,
+            default: false,
         },
         statusVariant: variantProp({
             defaultVariant: 'success',
@@ -217,13 +217,15 @@ export default defineComponent({
                     )}
                 </div>
 
-                <AvatarStatus
-                    avatar-shape={props.shape}
-                    shape={props.statusShape}
-                    avatar-size={props.size}
-                    position={props.statusPosition}
-                    variant={props.statusVariant}
-                />
+                {props.status && (
+                    <AvatarStatus
+                        avatar-shape={props.shape}
+                        shape={props.statusShape}
+                        avatar-size={props.size}
+                        position={props.statusPosition}
+                        variant={props.statusVariant}
+                    />
+                )}
             </div>
         )
     },

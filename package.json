@@ -14,13 +14,15 @@
         "url": "git+https://github.com/kamona-ui/vue.git"
     },
     "files": [
-        "dist"
+        "dist",
+        "src"
     ],
     "module": "./dist/kui-vue.es.js",
     "exports": {
         ".": {
             "import": "./dist/kui-vue.es.js"
         },
+        "./tw-plugin": "./src/tw-plugin.js",
         "./style/kui-vue.css": "./dist/kui-vue.css"
     },
     "scripts": {
@@ -30,10 +32,11 @@
         "format": "prettier -w src"
     },
     "dependencies": {
-        "@headlessui/vue": "^1.7.22",
+        "@headlessui/vue": "^1.7.23",
         "@iconify/vue": "^4.1.2",
         "flatpickr": "^4.6.13",
-        "vue": "^3.4.37"
+        "vue": "^3.4.37",
+        "vue-toastification": "^2.0.0-rc.5"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.9",

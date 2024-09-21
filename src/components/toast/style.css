@@ -1,7 +1,4 @@
-/* @import './vars.css'; */
-@import 'flatpickr/dist/flatpickr.css';
 @import 'vue-toastification/dist/index.css';
-@import './tailwind.css';
 
 .Vue-Toastification__toast {
   padding: 0 !important;

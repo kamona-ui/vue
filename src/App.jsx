@@ -6,11 +6,12 @@ import ButtonGroup from './tabs/ButtonGroup'
 import Form from './tabs/Form'
 import Panel from './tabs/Panel'
 import Modal from './tabs/Modal'
+import Toast from './tabs/Toast'
 import { isDark, toggleDarkMode } from './composables'
 
 export default defineComponent({
     setup() {
-        const activeTab = ref('Avatar')
+        const activeTab = ref('Toast')
         const tabs = [
             'Avatar',
             'Badge',
@@ -19,6 +20,7 @@ export default defineComponent({
             'Form',
             'Panel',
             'Modal',
+            'Toast',
         ]
 
         const themeMainColors = ['purple', 'fuchsia', 'violet', 'teal', 'lime']
@@ -85,6 +87,7 @@ export default defineComponent({
                     <Form v-show={activeTab.value == 'Form'} />
                     <Panel v-show={activeTab.value == 'Panel'} />
                     <Modal v-show={activeTab.value == 'Modal'} />
+                    <Toast v-show={activeTab.value == 'Toast'} />
                 </div>
             </div>
         )
