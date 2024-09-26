@@ -21,19 +21,25 @@ export {
 
 export * as toast from './components/toast'
 
-function install(Vue) {
+function install(Vue, options = {}) {
+    const { 
+        toast = true
+     } = options
+
     for (const component in components) {
         Vue.component(`Kui${component}`, components[component])
     }
 
-    Vue.use(Toast, {
-        hideProgressBar: true,
-        closeOnClick: false,
-        closeButton: false,
-        icon: false,
-        timeout: false,
-        transition: 'Vue-Toastification__fade',
-    })
+    if(toast) {
+        Vue.use(Toast, {
+            hideProgressBar: true,
+            closeOnClick: false,
+            closeButton: false,
+            icon: false,
+            timeout: false,
+            transition: 'Vue-Toastification__fade',
+        })
+    }
 }
 
 export default install
