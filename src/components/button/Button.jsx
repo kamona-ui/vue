@@ -1,6 +1,6 @@
 import { defineComponent, toRefs } from 'vue'
 import { Icon } from '@iconify/vue'
-import { shapeProp, shapes, sizeProp, sizes, variantProp, variants } from '@/support'
+import { getComponent, isComponent, shapeProp, shapes, sizeProp, sizes, variantProp, variants } from '@/support'
 
 // TODO: Handle active button style
 // TODO: handle link components `router-link, ...`
@@ -142,9 +142,9 @@ export default defineComponent({
     props: {
         ...baseButtonProps,
         as: {
-            // type: [String, Object],
+            type: [String, Object],
             required: false,
-            default: 'a',
+            default: undefined,
         },
         to: {
             type: [String, Object],
@@ -152,6 +152,10 @@ export default defineComponent({
         },
         href: {
             type: String,
+        },
+        native: {
+            type: Boolean,
+            default: false,
         },
         type: {
             type: String,
@@ -214,7 +218,9 @@ export default defineComponent({
         const {
             type,
             size,
+            to,
             href,
+            native,
             srText,
             external,
             outline,
@@ -264,7 +270,7 @@ export default defineComponent({
             },
             {
                 'pointer-events-none opacity-50':
-                    (href || props.to) && disabled.value,
+                    (href || to) && disabled.value,
             },
         ]
 
@@ -287,13 +293,23 @@ export default defineComponent({
             emit('click', e)
         }
 
-        const Tag = props.as
+        const LinkTag = () => {
+            if (props.as) { 
+                return props.as
+            } else if(native) {
+                return 'a'
+            } else if(isComponent('router-link')) {
+                return getComponent('router-link')
+            } else if (isComponent('router-link')) {
+                return getComponent('nuxt-link')
+            }
+        }
 
-        if (href || props.to) {
+        if (href || to || props.as) {
             return () => (
-                <Tag
-                    href={!disabled.value ? href : null}
-                    to={!disabled.value ? props.to : null}
+                <LinkTag
+                    href={(!disabled.value && !to) ? href : null}
+                    to={(!disabled.value && !href) ? to : null}
                     class={classes}
                     aria-disabled={disabled.value.toString()}
                     target={external ? '_blank' : null}
@@ -308,7 +324,7 @@ export default defineComponent({
                     )}
                     {text.value ?? slots.default?.({ iconSizeClasses })}
                     {endIcon && <Icon icon={endIcon} class={iconSizeClasses} />}
-                </Tag>
+                </LinkTag>
             )
         }
 

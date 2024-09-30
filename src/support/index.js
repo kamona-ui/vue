@@ -1,3 +1,5 @@
+import { resolveComponent, resolveDynamicComponent } from "vue"
+
 const baseSizes = ['sm', 'base', 'lg']
 const baseShapes = ['square', 'rounded', 'pill', 'circle']
 const baseVariants = [
@@ -49,6 +51,10 @@ const variantProp = ({
     },
 })
 
+const isComponent = name => typeof resolveDynamicComponent(name) !== 'string'
+
+const getComponent = name => resolveComponent(name)
+
 export {
     baseSizes as sizes,
     baseShapes as shapes,
@@ -58,4 +64,6 @@ export {
     shapeProp,
     variantProp,
     positionProp,
+    isComponent,
+    getComponent,
 }
